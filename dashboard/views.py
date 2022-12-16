@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from dashboard.models import Notes
+from dashboard.forms import *
 # Create your views here.
 
 
@@ -8,8 +9,10 @@ def home(request):
 
 
 def notes(request):
+    form = NotesForm()
     notes = Notes.objects.filter(user=request.user)
     context = {
-        'notes': notes
+        'notes': notes,
+        'form': form
     }
     return render(request, 'dashboard/notes.html', context) 
